@@ -21,7 +21,7 @@ module "subdomain_prod_cohorts_red" {
   }
 
   zones = {
-    "prod.${local.domain_cohorts_red}" = {
+    "prod.${local.domain_cdicohorts_red}" = {
       tags = {
         cluster = "nonprod"
       }
@@ -40,19 +40,19 @@ module "subdomain_zone_delegation_prod_cohorts_red" {
   create  = true
 
   providers = {
-    aws = aws.domain_cohorts_red
+    aws = aws.domain_cdicohorts_red
   }
 
   private_zone = false
-  zone_name = local.domain_cohorts_red
+  zone_name = local.domain_cdicohorts_red
   records = [
     {
       name            = "prod"
       type            = "NS"
       ttl             = 172800
-      zone_id         = data.aws_route53_zone.zone_id_cohorts_red.id
+      zone_id         = data.aws_route53_zone.zone_id_cdicohorts_red.id
       allow_overwrite = true
-      records         = lookup(module.subdomain_prod_cohorts_red.route53_zone_name_servers,"prod.${local.domain_cohorts_red}")
+      records         = lookup(module.subdomain_prod_cohorts_red.route53_zone_name_servers,"prod.${local.domain_cdicohorts_red}")
     }
   ]
 
